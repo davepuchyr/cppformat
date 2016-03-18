@@ -487,15 +487,17 @@ struct LocaleMock {
 } *LocaleMock::instance;
 
 #ifdef _MSC_VER
-_locale_t _create_locale(int category, const char *locale) {
+#define FMT_CRT __declspec(dllexport)
+
+FMT_CRT _locale_t _create_locale(int category, const char *locale) {
   return LocaleMock::instance->newlocale(category, locale, 0);
 }
 
-void _free_locale(_locale_t locale) {
+FMT_CRT void _free_locale(_locale_t locale) {
   LocaleMock::instance->freelocale(locale);
 }
 
-double _strtod_l(const char *nptr, char **endptr, _locale_t locale) {
+FMT_CRT double _strtod_l(const char *nptr, char **endptr, _locale_t locale) {
   return LocaleMock::instance->strtod_l(nptr, endptr, locale);
 }
 #endif
