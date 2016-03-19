@@ -16,3 +16,6 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 run-msbuild.bat
+**/*.cbp
+**/*.cmake
+**/*.kdev
